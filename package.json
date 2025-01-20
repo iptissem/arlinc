@@ -1,0 +1,22 @@
+{
+  "name": "arlinc",
+  "version": "1.0.0",
+  "description": "coucou",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",  
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iptissem/arlinc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iptissem/arlinc/issues"
+  },
+  "homepage": "https://github.com/iptissem/arlinc#readme",
+  "dependencies": {}
+}
