@@ -4,7 +4,7 @@
   "description": "coucou",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",  
+    "start": "node index.js",
     "test": "echo \"No tests yet\""
   },
   "repository": {
@@ -18,5 +18,7 @@
     "url": "https://github.com/iptissem/arlinc/issues"
   },
   "homepage": "https://github.com/iptissem/arlinc#readme",
-  "dependencies": {}
+  "dependencies": {
+    "mongodb": "^6.12.0"
+  }
 }
