@@ -1,0 +1,16 @@
+id,name,email,password,adress,city
+1,Intermarché,entreprise1@example.com,pass1,Adress 1,Lyon
+2,Auchan,entreprise2@example.com,pass2,Adress 2,Marseille
+3,Auchan,entreprise3@example.com,pass3,Adress 3,Marseille
+4,Monoprix,entreprise4@example.com,pass4,Adress 4,Toulouse
+5,Intermarché,entreprise5@example.com,pass5,Adress 5,Nice
+6,Intermarché,entreprise6@example.com,pass6,Adress 6,Paris
+7,Carrefour,entreprise7@example.com,pass7,Adress 7,Toulouse
+8,Auchan,entreprise8@example.com,pass8,Adress 8,Toulouse
+9,Monoprix,entreprise9@example.com,pass9,Adress 9,Paris
+10,Carrefour,entreprise10@example.com,pass10,Adress 10,Nice
+11,Lidl,entreprise11@example.com,pass11,Adress 11,Lyon
+12,Carrefour,entreprise12@example.com,pass12,Adress 12,Lyon
+13,Monoprix,entreprise13@example.com,pass13,Adress 13,Lyon
+14,Carrefour,entreprise14@example.com,pass14,Adress 14,Nice
+15,Carrefour,entreprise15@example.com,pass15,Adress 15,Marseille
