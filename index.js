@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 //       await client.close();
 //   }
 // });
-
+/* 
 app.get('/test', async (req, res) => {
   const client = new MongoClient(uri);
 
@@ -66,6 +66,9 @@ app.get('/test', async (req, res) => {
 });
 
 // Nouvelle route pour afficher les collections
+
+
+
 app.get('/collections', async (req, res) => {
   const client = new MongoClient(uri);
 
@@ -97,4 +100,84 @@ app.get('/collections', async (req, res) => {
 // Démarrer le serveur
 app.listen(port, () => {
     console.log(`Serveur démarré sur le port ${port}`);
+});
+ */
+
+const connectToDb = async () => {
+    const client = new MongoClient(uri);
+    await client.connect();
+    return client;
+};
+/* 
+Route GET 
+*/
+
+app.get('/particulier', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('Particulier');
+    const data = await collection.find().toArray();
+    client.close();
+    res.json(data);
+});
+
+app.get('/cart', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('Cart');
+    const data = await collection.find().toArray();
+    client.close();
+    res.json(data);
+});
+
+app.get('/order', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('Order');
+    const data = await collection.find().toArray();
+    client.close();
+    res.json(data);
+});
+
+app.get('/orderhistory', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('OrderHistory');
+    const data = await collection.find().toArray();
+    client.close();
+    res.json(data);
+});
+
+app.get('/entreprise', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('Entreprise');
+    const data = await collection.find().toArray();
+    client.close();
+    res.json(data);
+});
+
+app.get('/entreprise/:id', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('Entreprise');
+    
+    try {
+        const id = parseInt(req.params.id,10);
+        const data = await collection.findOne({ id: id });
+        
+        if (!data) {
+            res.status(404).json({ message: 'Entreprise non trouvée' });
+        } else {
+            res.json(data);
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la récupération de l\'entreprise', error });
+    } finally {
+        client.close();
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });

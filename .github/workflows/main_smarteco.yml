@@ -37,6 +37,18 @@ jobs:
         with:
           name: node-app
           path: release.zip
+      
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  # Vous pouvez choisir une autre version de Python si nécessaire
+      
+      - name: Install Python dependencies
+        run: |
+          python -m venv venv 
+          source venv/bin/activate 
+          pip install --upgrade pip 
+          pip install Flask==3.1.0 Flask-PyMongo==2.3.0 Flask-RESTful==0.3.10 pymongo==4.10.1 
 
   deploy:
     runs-on: ubuntu-latest
