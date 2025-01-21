@@ -1,26 +1,16 @@
-const http = require('http');
-const port = process.env.PORT || 3000; // Si la variable d'environnement PORT est définie, elle sera utilisée, sinon il se tournera vers le port 3000 par défaut.
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World! Coucou');
-});
-
 const express = require('express');
 const { MongoClient } = require('mongodb');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// URL de connexion MongoDB (remplacez par votre URL dans Azure)
+// URL de connexion MongoDB (à remplacer par votre chaîne de connexion Azure Cosmos)
 const uri = process.env.AZURE_COSMOS_CONNECTIONSTRING;
-
-
-// Nom de la base de données
-const dbName = "arlinc_database";
+const dbName = "arlinc_database"; // Nom de la base de données
 
 app.get('/test', async (req, res) => {
     const client = new MongoClient(uri);
-    console.log("AAAAAAAAA")
+
     try {
         // Connexion à MongoDB
         await client.connect();
@@ -29,20 +19,16 @@ app.get('/test', async (req, res) => {
         // Accès à la base de données
         const db = client.db(dbName);
 
-        // Obtenir les noms des collections
-        const collections = await db.listCollections().toArray();
+        // Tester la connexion avec une simple opération
+        const serverStatus = await db.command({ ping: 1 });
 
-        // Préparer les noms des collections
-        const collectionNames = collections.map((collection) => collection.name);
-
-        // Envoyer les noms des collections comme réponse
         res.json({
-            message: "Collections dans la base de données",
-            collections: collectionNames,
+            message: "Connexion réussie à MongoDB",
+            serverStatus: serverStatus
         });
     } catch (err) {
-        console.error("Erreur :", err);
-        res.status(500).json({ error: "Une erreur s'est produite" });
+        console.error("Erreur de connexion MongoDB :", err);
+        res.status(500).json({ error: "Impossible de se connecter à la base de données" });
     } finally {
         // Fermeture de la connexion
         await client.close();
