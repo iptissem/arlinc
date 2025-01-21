@@ -163,8 +163,8 @@ app.get('/entreprise/:id', async (req, res) => {
     const collection = db.collection('Entreprise');
     
     try {
-        const id = req.params.id;
-        const data = await collection.findOne({ _id: new ObjectId(id) });
+        const id = parseInt(req.params.id,10);
+        const data = await collection.findOne({ id: id });
         
         if (!data) {
             res.status(404).json({ message: 'Entreprise non trouvée' });
