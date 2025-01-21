@@ -108,8 +108,19 @@ const connectToDb = async () => {
     await client.connect();
     return client;
 };
+/* 
+Route GET 
+*/
 
-// Routes GET pour les collections
+app.get('/particulier', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('Particulier');
+    const data = await collection.find().toArray();
+    client.close();
+    res.json(data);
+});
+
 app.get('/cart', async (req, res) => {
     const client = await connectToDb();
     const db = client.db(dbName);
@@ -146,7 +157,27 @@ app.get('/entreprise', async (req, res) => {
     res.json(data);
 });
 
-// Lancement du serveur
+app.get('/entreprise/:id', async (req, res) => {
+    const client = await connectToDb();
+    const db = client.db(dbName);
+    const collection = db.collection('Entreprise');
+    
+    try {
+        const id = req.params.id;
+        const data = await collection.findOne({ _id: new ObjectId(id) });
+        
+        if (!data) {
+            res.status(404).json({ message: 'Entreprise non trouvée' });
+        } else {
+            res.json(data);
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur lors de la récupération de l\'entreprise', error });
+    } finally {
+        client.close();
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
