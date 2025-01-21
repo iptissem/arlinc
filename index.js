@@ -2,7 +2,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 
 const app = express();
-const port = 8080;
+const port = process.env.WEBSITES_PORT || 8080;
 
 // URL de connexion MongoDB (à remplacer par votre chaîne de connexion Azure Cosmos)
 const uri = process.env.AZURE_COSMOS_CONNECTIONSTRING;
