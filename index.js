@@ -8,6 +8,11 @@ const port = process.env.WEBSITES_PORT || 8080;
 const uri = process.env.AZURE_COSMOS_CONNECTIONSTRING;
 const dbName = "arlinc_database"; // Nom de la base de données
 
+app.get('/', (req, res) => {
+  res.send('Bienvenue sur l\'application Express!');
+});
+
+
 app.get('/test', async (req, res) => {
   const client = new MongoClient(uri);
   try {
