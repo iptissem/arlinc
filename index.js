@@ -1,4 +1,4 @@
-require('dotenv').config(); // Charger les variables d'environnement
+//require('dotenv').config(); // Charger les variables d'environnement
 
 const http = require('http');
 const { MongoClient } = require('mongodb');
@@ -40,7 +40,7 @@ const server = http.createServer(async (req, res) => {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Page d'Accueil</title>
+                <title>Page d'Accueil : Coucou</title>
             </head>
             <body>
                 <h1>Hello World ! Vous êtes sur la page d'accueil</h1>
