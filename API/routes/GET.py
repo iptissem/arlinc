@@ -5,17 +5,17 @@ from bson.objectid import ObjectId
 import os 
 from dotenv import load_dotenv
 
-load_dotenv()
 
 app = Flask(__name__)
 mongo_uri = os.getenv("AZURE_COSMOS_DATABASE")
 
 if mongo_uri is None:    
     # Test local
+    load_dotenv()
     mongo_uri = os.getenv('MONGO_URI')
     print("La variable d'environnement 'MONGO_URI' n'est pas définie.")
     
-
+    
 print("Debug URI Mongo",mongo_uri)
 
 app.config["MONGO_URI"] = mongo_uri
