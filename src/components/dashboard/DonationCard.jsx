@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from '../common/Icon';
 import { COLORS } from '../../styles/colors';
 
 const DonationCard = ({ donation, onPress }) => {
+  const [isReserved, setIsReserved] = useState(false);
+
+  const handlePress = () => {
+    if (!isReserved) {
+      setIsReserved(true);
+      onPress(); // Appelle la fonction de réservation passée en prop
+    }
+  };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.storeName}>{donation.storeName}</Text>
         <Text style={styles.distance}>{donation.distance} km</Text>
@@ -27,12 +36,26 @@ const DonationCard = ({ donation, onPress }) => {
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.quantity}>Quantité: {donation.quantity}</Text>
-        <TouchableOpacity style={styles.reserveButton}>
-          <Text style={styles.reserveText}>Réserver</Text>
+        <View>
+          <Text style={styles.quantity}>Quantité: {donation.quantity}</Text>
+          <Text style={styles.availablePacks}>
+            Paniers disponibles: {donation.availablePacks}
+          </Text>
+        </View>
+        <TouchableOpacity
+          style={[
+            styles.reserveButton,
+            isReserved && styles.reservedButton, // Applique un style différent si réservé
+          ]}
+          onPress={handlePress}
+          disabled={isReserved} // Désactive le bouton si déjà réservé
+        >
+          <Text style={styles.reserveText}>
+            {isReserved ? 'Déjà réservé' : 'Réserver'}
+          </Text>
         </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -85,11 +108,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  availablePacks: {
+    fontSize: 14,
+    color: COLORS.secondary,
+    marginTop: 4,
+  },
   reserveButton: {
     backgroundColor: COLORS.secondary,
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 4,
+  },
+  reservedButton: {
+    backgroundColor: COLORS.gray, // Change la couleur une fois réservé
   },
   reserveText: {
     color: COLORS.white,
@@ -97,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DonationCard; 
+export default DonationCard;
