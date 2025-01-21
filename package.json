@@ -4,7 +4,7 @@
   "description": "coucou",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node test.js",
     "test": "echo \"No tests yet\""
   },
   "repository": {
