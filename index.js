@@ -12,7 +12,7 @@ const { MongoClient } = require('mongodb');
 const app = express();
 
 // URL de connexion MongoDB (remplacez par votre URL dans Azure)
-const uri = process.env.MONGODB_URI;
+const uri = process.env.AZURE_COSMOS_CONNECTIONSTRING;
 
 
 // Nom de la base de données
