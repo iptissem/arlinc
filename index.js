@@ -9,30 +9,28 @@ const uri = process.env.AZURE_COSMOS_CONNECTIONSTRING;
 const dbName = "arlinc_database"; // Nom de la base de données
 
 app.get('/test', async (req, res) => {
-    const client = new MongoClient(uri);
+  const client = new MongoClient(uri);
+  try {
+      await client.connect();
+      console.log("Connecté à MongoDB");
 
-    try {
-        // Connexion à MongoDB
-        await client.connect();
-        console.log("Connecté à MongoDB");
+      const db = client.db(dbName);
+      const serverStatus = await db.command({ ping: 1 });
 
-        // Accès à la base de données
-        const db = client.db(dbName);
-
-        // Tester la connexion avec une simple opération
-        const serverStatus = await db.command({ ping: 1 });
-
-        res.json({
-            message: "Connexion réussie à MongoDB",
-            serverStatus: serverStatus
-        });
-    } catch (err) {
-        console.error("Erreur de connexion MongoDB :", err);
-        res.status(500).json({ error: "Impossible de se connecter à la base de données" });
-    } finally {
-        // Fermeture de la connexion
-        await client.close();
-    }
+      res.json({
+          message: "Connexion réussie à MongoDB",
+          serverStatus: serverStatus
+      });
+  } catch (err) {
+      console.error("Erreur de connexion MongoDB :", err);
+      res.status(500).json({
+          error: "Impossible de se connecter à la base de données",
+          message: err.message,
+          stack: err.stack // Afficher la pile d'appels pour obtenir plus d'infos
+      });
+  } finally {
+      await client.close();
+  }
 });
 
 // Démarrer le serveur
