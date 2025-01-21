@@ -113,7 +113,7 @@ const connectToDb = async () => {
 app.get('/cart', async (req, res) => {
     const client = await connectToDb();
     const db = client.db(dbName);
-    const collection = db.collection('cart');
+    const collection = db.collection('Cart');
     const data = await collection.find().toArray();
     client.close();
     res.json(data);
@@ -122,7 +122,7 @@ app.get('/cart', async (req, res) => {
 app.get('/order', async (req, res) => {
     const client = await connectToDb();
     const db = client.db(dbName);
-    const collection = db.collection('order');
+    const collection = db.collection('Order');
     const data = await collection.find().toArray();
     client.close();
     res.json(data);
@@ -131,7 +131,7 @@ app.get('/order', async (req, res) => {
 app.get('/orderhistory', async (req, res) => {
     const client = await connectToDb();
     const db = client.db(dbName);
-    const collection = db.collection('orderhistory');
+    const collection = db.collection('OrderHistory');
     const data = await collection.find().toArray();
     client.close();
     res.json(data);
@@ -140,7 +140,7 @@ app.get('/orderhistory', async (req, res) => {
 app.get('/entreprise', async (req, res) => {
     const client = await connectToDb();
     const db = client.db(dbName);
-    const collection = db.collection('entreprise');
+    const collection = db.collection('Entreprise');
     const data = await collection.find().toArray();
     client.close();
     res.json(data);
