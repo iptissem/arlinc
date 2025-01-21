@@ -18,9 +18,9 @@ const uri = process.env.MONGODB_URI;
 // Nom de la base de données
 const dbName = "arlinc_database";
 
-app.get('/', async (req, res) => {
+app.get('/test', async (req, res) => {
     const client = new MongoClient(uri);
-
+    console.log("AAAAAAAAA")
     try {
         // Connexion à MongoDB
         await client.connect();
