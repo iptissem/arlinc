@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-test" : "node test.js",
     "test": "echo \"No tests yet\""
   },
   "repository": {
